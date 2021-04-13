@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}{{ object.title }}{% endblock %}
+{% block content %}
+<h1>{{ object.title }}</h1>
+<p>Type of the event:{{ object.event_type }}</p>
+<p>{{ object.description }}</p>
+<p>City: {{ object.city }}</p>
+<p>Address: {{ object.address }}</p>
+<p>Price: {{ object.price }}</p>
+<p>Organizer: {{ object.organizer }}</p>
+{% endblock %}
