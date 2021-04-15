@@ -79,10 +79,26 @@ WSGI_APPLICATION = 'AroundU.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': str(os.path.join(BASE_DIR, "db.sqlite3")),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+
+        'NAME': 'AroundU',
+
+        'USER': 'AroundU',
+
+        'PASSWORD': '536325',
+
+        'HOST': 'localhost',
+
+        'PORT': '5432',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': str(os.path.join(BASE_DIR, "db.sqlite3")),
+#     }
+# }
 
 
 # Password validation
