@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from events.views import event_create_view, event_list_view, dynamic_lookup_view, events, event_detail, join_event, UserList, UserDetail, EventList, EventDetail, VisitorsList
+from events.views import event_create_view, event_list_view, dynamic_lookup_view, events, event_detail, join_event, UserList, UserDetail, EventList, EventDetail, VisitorsList, VisitDetail
 from users.views import signup
 
 urlpatterns = [
@@ -33,6 +33,7 @@ urlpatterns = [
     path('users/', UserList.as_view()),
     path('users/<int:pk>/', UserDetail.as_view()),
     path('visitors/', VisitorsList.as_view()),
+    path('visitors/<int:pk>/', VisitDetail.as_view()),
     # Log_in button
     path('api-auth/', include('rest_framework.urls')),
 ]

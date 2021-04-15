@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Event, User, Visitors
+from .models import Event, Visitors
+from users.models import User
 from .forms import EventForm
 from .serializers import EventSerializer, VisitorsSerializer, UserSerializer
 from rest_framework.decorators import api_view
@@ -23,7 +24,7 @@ class EventList(generics.ListCreateAPIView):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     def perform_create(self, serializer):
-        serializer.save(author=self.request.user)
+        serializer.save(organizer=self.request.user)
 
 class EventDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Event.objects.all()
@@ -37,6 +38,12 @@ class VisitorsList(generics.ListCreateAPIView):
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
+
+class VisitDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Visitors.objects.all()
+    serializer_class = VisitorsSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsAuthorOrReadOnly]    
+
 
 # function-based views
 

@@ -1,6 +1,7 @@
 from django.db import models
-# from users.models import AppUser 
-from django.contrib.auth.models import User
+from users.models import User 
+from AroundU import settings
+# from django.contrib.auth.models import User
 
 # Create your models here.
 # def get_image_path(instance, filename):
@@ -27,7 +28,7 @@ class Event(models.Model):
     price = models.IntegerField(null=True,blank=True)
     date_of_creation = models.DateTimeField(auto_now_add=True)
     visitors_count = models.IntegerField(default=0)
-    organizer = models.ForeignKey('auth.User', related_name='events', on_delete=models.CASCADE) #if author is deleted - events are deleted 
+    organizer = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='events', on_delete=models.CASCADE) #if author is deleted - events are deleted 
         
     def get_absolute_url(self):
         return f"/events/{self.id}/"
@@ -36,15 +37,15 @@ class Event(models.Model):
         ordering = ['date_of_creation']
 
 class Visitors(models.Model):
-    user=models.ForeignKey('auth.User', related_name='visitors', on_delete=models.CASCADE)
+    user=models.ForeignKey(settings.AUTH_USER_MODEL, related_name='visitors', on_delete=models.CASCADE)
     event=models.ForeignKey('Event', related_name='visitors',on_delete=models.CASCADE)
 
     class Meta:
         unique_together = ("user", "event")
 
 class Coorganizers(models.Model):
-    user=models.ForeignKey('auth.User', related_name='visitors', on_delete=models.CASCADE)
-    event=models.ForeignKey('Event', related_name='visitors',on_delete=models.CASCADE)
+    user=models.ForeignKey(settings.AUTH_USER_MODEL, related_name='coorganizers', on_delete=models.CASCADE)
+    event=models.ForeignKey('Event', related_name='coorganizers',on_delete=models.CASCADE)
 
     class Meta:
         unique_together = ("user", "event")
