@@ -21,14 +21,13 @@ class Event(models.Model):
     event_type = models.CharField(max_length=3, choices=EVENT_TYPE)
     city = models.CharField(max_length=50)
     address = models.CharField(max_length=100)
+    # image = models.ImageField(upload_to=get_image_path, blank=True, null=True)
     date_and_time_of_event = models.DateTimeField()
-    # cover = models.ImageField(upload_to=get_image_path, blank=True, null=True)
     max_number_of_people = models.IntegerField(null=True,blank=True)
     price = models.IntegerField(null=True,blank=True)
-    organizer = models.CharField(max_length=150)
     date_of_creation = models.DateTimeField(auto_now_add=True)
-    author = models.ForeignKey('auth.User', related_name='events', on_delete=models.CASCADE) #if author is deleted - events are deleted 
     visitors_count = models.IntegerField(default=0)
+    organizer = models.ForeignKey('auth.User', related_name='events', on_delete=models.CASCADE) #if author is deleted - events are deleted 
         
     def get_absolute_url(self):
         return f"/events/{self.id}/"
@@ -43,3 +42,9 @@ class Visitors(models.Model):
     class Meta:
         unique_together = ("user", "event")
 
+class Coorganizers(models.Model):
+    user=models.ForeignKey('auth.User', related_name='visitors', on_delete=models.CASCADE)
+    event=models.ForeignKey('Event', related_name='visitors',on_delete=models.CASCADE)
+
+    class Meta:
+        unique_together = ("user", "event")
