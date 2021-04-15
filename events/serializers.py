@@ -20,4 +20,4 @@ class UserSerializer(serializers.ModelSerializer):
     visitors = serializers.PrimaryKeyRelatedField(read_only=True)
     class Meta:
         model = User
-        fields = ['id', 'username', 'events']
+        fields = ['id', 'username', 'events', 'visitors']
