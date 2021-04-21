@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from events.views import event_create_view, event_list_view, dynamic_lookup_view, events, event_detail, join_event, UserList, UserDetail, EventList, EventDetail, VisitorsList, VisitDetail
+from events.views import event_create_view, event_list_view, dynamic_lookup_view, events, event_detail, join_event, UserList, UserDetail, EventList, EventDetail, VisitorsList, VisitDetail, OrganizerEventList
 from users.views import signup
 
 urlpatterns = [
@@ -31,6 +31,7 @@ urlpatterns = [
     # path('events/<int:id>/', event_detail),
     path('events/<int:id>/join', join_event),
     path('users/', UserList.as_view()),
+    path('users/<int:organizer>/events', OrganizerEventList.as_view()),
     path('users/<int:pk>/', UserDetail.as_view()),
     path('visitors/', VisitorsList.as_view()),
     path('visitors/<int:pk>/', VisitDetail.as_view()),
