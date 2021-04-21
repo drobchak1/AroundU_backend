@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from versatileimagefield.fields import VersatileImageField, PPOIField
+from AroundU import settings
+from versatileimagefield.fields import VersatileImageField, PPOIField
 
 class User(AbstractUser):
  ###################################################
@@ -26,3 +28,16 @@ class User(AbstractUser):
     city = models.CharField(max_length=20,null=True,blank=True)
     # image = models.ImageField(upload_to=get_image_path, blank=True, null=True)
     phone = models.CharField(max_length=20,null=True,blank=True)
+    image = models.ForeignKey('ImageofUser', related_name='users', blank=True,null=True, on_delete=models.CASCADE)
+
+class ImageofUser(models.Model):
+    name = models.CharField(max_length=255)
+    image = VersatileImageField(
+        'ImageofUser',
+        upload_to='imagesofuser/',
+        ppoi_field='image_ppoi'
+    )
+    image_ppoi = PPOIField()
+
+    def __str__(self):
+        return self.name
