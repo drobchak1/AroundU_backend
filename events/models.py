@@ -30,7 +30,15 @@ class Event(models.Model):
     date_of_creation = models.DateTimeField(auto_now_add=True)
     visitors_count = models.IntegerField(default=0)
     organizer = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='events', on_delete=models.CASCADE)
-    image = models.ForeignKey('ImageofEvent', related_name='events', blank=True,null=True, on_delete=models.CASCADE)
+    # image = models.ForeignKey('ImageofEvent', related_name='events', blank=True,null=True, on_delete=models.CASCADE)
+    image = VersatileImageField(
+        #'ImageofEvent',
+        upload_to='images/',
+        ppoi_field='image_ppoi', 
+        blank=True,
+        null=True,
+    )
+    image_ppoi = PPOIField()
         
     def get_absolute_url(self):
         return f"/events/{self.id}/"
@@ -52,14 +60,14 @@ class Coorganizers(models.Model):
     class Meta:
         unique_together = ("user", "event")
 
-class ImageofEvent(models.Model):
-    # name = models.CharField(max_length=255)
-    image = VersatileImageField(
-        'ImageofEvent',
-        upload_to='images/',
-        ppoi_field='image_ppoi'
-    )
-    image_ppoi = PPOIField()
+# class ImageofEvent(models.Model):
+#     # name = models.CharField(max_length=255)
+#     image = VersatileImageField(
+#         'ImageofEvent',
+#         upload_to='images/',
+#         ppoi_field='image_ppoi'
+#     )
+#     image_ppoi = PPOIField()
 
-    def __str__(self):
-        return self.name
+#     def __str__(self):
+#         return self.name

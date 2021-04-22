@@ -1,8 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Event, Visitors, ImageofEvent, Coorganizers
+from .models import Event, Visitors, Coorganizers #ImageofEvent, 
 from users.models import User, ImageofUser
 from .forms import EventForm
-from .serializers import EventSerializer, VisitorsSerializer, UserSerializer, ImageofEventSerializer, ImageofUserSerializer
+from .serializers import EventSerializer, VisitorsSerializer, UserSerializer     #, ImageofEventSerializer, ImageofUserSerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status, generics,permissions
@@ -56,18 +56,18 @@ class VisitDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = VisitorsSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsAuthorOrReadOnly]   
 
-class ImageofEventViewSet(FlexFieldsModelViewSet):
+# class ImageofEventViewSet(FlexFieldsModelViewSet):
 
-    serializer_class = ImageofEventSerializer
-    queryset = ImageofEvent.objects.all()
+#     serializer_class = ImageofEventSerializer
+#     queryset = ImageofEvent.objects.all()
 
-class ImageofUserViewSet(FlexFieldsModelViewSet):
+# class ImageofUserViewSet(FlexFieldsModelViewSet):
 
-    serializer_class = ImageofUserSerializer
-    queryset = ImageofUser.objects.all()
+#     serializer_class = ImageofUserSerializer
+#     queryset = ImageofUser.objects.all()
 
-    def perform_create(self, serializer):
-        serializer.save(organizer=self.request.user)
+#     def perform_create(self, serializer):
+#         serializer.save(organizer=self.request.user)
 
 # function-based views
 
