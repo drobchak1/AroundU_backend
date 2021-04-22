@@ -53,7 +53,7 @@ class Coorganizers(models.Model):
         unique_together = ("user", "event")
 
 class ImageofEvent(models.Model):
-    name = models.CharField(max_length=255)
+    # name = models.CharField(max_length=255)
     image = VersatileImageField(
         'ImageofEvent',
         upload_to='images/',

@@ -2,7 +2,6 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from versatileimagefield.fields import VersatileImageField, PPOIField
 from AroundU import settings
-from versatileimagefield.fields import VersatileImageField, PPOIField
 
 class User(AbstractUser):
  ###################################################
@@ -31,7 +30,7 @@ class User(AbstractUser):
     image = models.ForeignKey('ImageofUser', related_name='users', blank=True,null=True, on_delete=models.CASCADE)
 
 class ImageofUser(models.Model):
-    name = models.CharField(max_length=255)
+    # name = models.CharField(max_length=255)
     image = VersatileImageField(
         'ImageofUser',
         upload_to='imagesofuser/',
