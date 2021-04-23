@@ -40,15 +40,16 @@ urlpatterns = [
     # path('image_of_event/<int:pk>/', ImageofEventViewSet.as_view()),
     # path('events/', events),
     # path('events/<int:id>/', event_detail),
-    path('events/<int:id>/join', join_event),
+    path('events/<int:pk>/join', join_event),
     path('users/', UserList.as_view()),
     path('users/<int:organizer>/events', OrganizerEventList.as_view()),
     path('users/<int:pk>/', UserDetail.as_view()),
     path('visitors/', VisitorsList.as_view()),
     path('visitors/<int:pk>/', VisitDetail.as_view()),
-    # Log_in button
+    # Login and logout
     path('api-auth/', include('rest_framework.urls')),
     # url(r'^', include(router.urls)),
+    ###################LOGIN NEEDS WORK
     path('login/', MyObtainTokenPairView.as_view(), name='token_obtain_pair'),
     path('login/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('register/', RegisterView.as_view(), name='auth_register'),

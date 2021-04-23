@@ -37,6 +37,17 @@ class OrganizerEventList(generics.ListCreateAPIView):
         # return queryset.filter(organizer_id=organizer_id)
         return Event.objects.filter(organizer=self.kwargs['organizer'])
 
+# SELECT * FROM events_event JOIN events_visitors ON event_id=events_event.id WHERE events_event.id=1
+# class VisitorEventList(generics.ListCreateAPIView):
+#     # queryset = Event.objects.all()
+#     serializer_class = EventSerializer
+#     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+#     def get_queryset(self):
+#         # queryset = Event.objects.all()
+#         # return queryset.filter(organizer_id=organizer_id)
+#         return Event.objects.filter(organizer=self.kwargs['organizer'])
+
 
 class EventDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Event.objects.all()
