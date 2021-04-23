@@ -1,1 +1,1 @@
-web: gunicorn app:manage
+web: gunicorn AroundU.wsgi --pythonpath=AroundU --log-file -
