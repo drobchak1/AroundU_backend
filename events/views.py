@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Event, Visitors, Coorganizers #ImageofEvent, 
-from users.models import User, ImageofUser
+from users.models import User #, ImageofUser
 from .forms import EventForm
 from .serializers import EventSerializer, VisitorsSerializer, UserSerializer     #, ImageofEventSerializer, ImageofUserSerializer
 from rest_framework.decorators import api_view
