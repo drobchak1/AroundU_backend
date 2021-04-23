@@ -16,12 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from events.views import event_create_view, event_list_view, dynamic_lookup_view, events, event_detail, join_event, UserList, UserDetail, EventList, EventDetail, VisitorsList, VisitDetail, OrganizerEventList   #, ImageofEventViewSet, ImageofUserViewSet
-from users.views import signup
+from users.views import signup, MyObtainTokenPairView, RegisterView
 # Images
 from django.conf import settings
 from django.conf.urls import url, include
 from django.conf.urls.static import static
 from rest_framework.routers import DefaultRouter
+from rest_framework_simplejwt.views import TokenRefreshView
 
 router = DefaultRouter()
 # router.register(r'image_of_event', ImageofEventViewSet, basename='ImageofEvent')
@@ -48,6 +49,9 @@ urlpatterns = [
     # Log_in button
     path('api-auth/', include('rest_framework.urls')),
     url(r'^', include(router.urls)),
+    path('login/', MyObtainTokenPairView.as_view(), name='token_obtain_pair'),
+    path('login/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('register/', RegisterView.as_view(), name='auth_register'),
 ]
 
 if settings.DEBUG:

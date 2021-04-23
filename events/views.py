@@ -56,6 +56,8 @@ class VisitDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = VisitorsSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsAuthorOrReadOnly]   
 
+
+
 # class ImageofEventViewSet(FlexFieldsModelViewSet):
 
 #     serializer_class = ImageofEventSerializer

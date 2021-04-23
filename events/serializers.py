@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from .models import Event, Visitors, Coorganizers    #, ImageofEvent
 from users.models import User   #, ImageofUser
-from versatileimagefield.serializers import VersatileImageFieldSerializer
+from versatileimagefield.serializers import VersatileImageFieldSerializer 
 
 # class ImageofEventSerializer(serializers.ModelSerializer):
 #     image = VersatileImageFieldSerializer(
