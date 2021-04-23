@@ -1,7 +1,9 @@
 asgiref==3.3.1
 certifi==2020.12.5
+dj-database-url==0.5.0
 Django==3.0.5
 django-filter==2.4.0
+django-heroku==0.3.1
 django-versatileimagefield==2.0
 djangorestframework==3.12.4
 djangorestframework-simplejwt==4.6.0
@@ -15,4 +17,5 @@ pymongo==3.11.3
 python-magic==0.4.22
 pytz==2021.1
 sqlparse==0.2.4
+whitenoise==5.2.0
 wincertstore==0.2
