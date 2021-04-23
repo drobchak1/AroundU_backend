@@ -26,7 +26,7 @@ SECRET_KEY = 'sebm(41$cmww7#jqe4pm*n#addk-sbsfdfsdva42#*hg$@85z*0hj$1p2'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['aroundu-backend.herokuapp.com']
 
 
 # Application definition
