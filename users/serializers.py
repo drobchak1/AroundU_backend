@@ -5,6 +5,19 @@ from rest_framework.validators import UniqueValidator
 from django.contrib.auth.password_validation import validate_password
 from versatileimagefield.serializers import VersatileImageFieldSerializer 
 
+class UserSerializer(serializers.ModelSerializer):
+    events = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+    visitors = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+    image = VersatileImageFieldSerializer(
+        sizes=[
+            ('full_size', 'url'),
+            ('thumbnail', 'thumbnail__100x100'),
+        ]
+    )
+    class Meta:
+        model = User
+        fields = '__all__'
+        
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
 
     @classmethod

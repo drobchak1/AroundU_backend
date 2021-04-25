@@ -15,8 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from events.views import event_create_view, event_list_view, dynamic_lookup_view, events, event_detail, join_event, UserList, UserDetail, EventList, EventDetail, VisitorsList, VisitDetail, OrganizerEventList   #, ImageofEventViewSet, ImageofUserViewSet
-from users.views import signup, MyObtainTokenPairView, RegisterView, ChangePasswordView, UpdateProfileView
+from events.views import event_create_view, event_list_view, dynamic_lookup_view, events, event_detail, join_event, EventList, EventDetail, VisitorsList, VisitDetail, OrganizerEventList   #, ImageofEventViewSet, ImageofUserViewSet
+from users.views import signup, MyObtainTokenPairView, RegisterView, ChangePasswordView, UpdateProfileView, UserList, UserDetail
 # Images
 from django.conf import settings
 from django.conf.urls import url, include

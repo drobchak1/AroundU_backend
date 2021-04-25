@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from .models import Event, Visitors, Coorganizers    #, ImageofEvent
-from users.models import User   #, ImageofUser
+# from users.models import User   #, ImageofUser
 from versatileimagefield.serializers import VersatileImageFieldSerializer 
 
 # class ImageofEventSerializer(serializers.ModelSerializer):
@@ -53,18 +53,3 @@ class CoorganizersSerializer(serializers.ModelSerializer):
     class Meta:
         model = Coorganizers
         fields = '__all__'
-
-class UserSerializer(serializers.ModelSerializer):
-    events = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
-    visitors = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
-    image = VersatileImageFieldSerializer(
-        sizes=[
-            ('full_size', 'url'),
-            ('thumbnail', 'thumbnail__100x100'),
-        ]
-    )
-    class Meta:
-        model = User
-        fields = '__all__'
-
-

@@ -2,7 +2,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import Event, Visitors, Coorganizers #ImageofEvent, 
 from users.models import User #, ImageofUser
 from .forms import EventForm
-from .serializers import EventSerializer, VisitorsSerializer, UserSerializer     #, ImageofEventSerializer, ImageofUserSerializer
+from .serializers import EventSerializer, VisitorsSerializer     #, ImageofEventSerializer, ImageofUserSerializer
+from users.serializers import UserSerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status, generics,permissions
@@ -11,13 +12,6 @@ from .permissions import IsAuthorOrReadOnly
 from rest_flex_fields.views import FlexFieldsModelViewSet
 
 # class-based views
-class UserList(generics.ListAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-
-class UserDetail(generics.RetrieveAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
 
 class EventList(generics.ListCreateAPIView):
     queryset = Event.objects.all()
