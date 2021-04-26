@@ -40,7 +40,7 @@ urlpatterns = [
     # path('image_of_event/<int:pk>/', ImageofEventViewSet.as_view()),
     # path('events/', events),
     # path('events/<int:id>/', event_detail),
-    path('events/<int:pk>/join', join_event),
+    # path('events/<int:pk>/join', join_event),
     path('users/', UserList.as_view()),
     path('users/<int:organizer>/events', OrganizerEventList.as_view()),
     path('users/<int:pk>/', UserDetail.as_view()),

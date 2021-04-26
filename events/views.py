@@ -8,7 +8,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status, generics,permissions
 from django.contrib.auth.decorators import login_required
-from .permissions import IsAuthorOrReadOnly
+from .permissions import IsAuthorOrReadOnly, IsAuthorOrReadOnlyVisit
 from rest_flex_fields.views import FlexFieldsModelViewSet
 
 # class-based views
@@ -59,7 +59,7 @@ class VisitorsList(generics.ListCreateAPIView):
 class VisitDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Visitors.objects.all()
     serializer_class = VisitorsSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsAuthorOrReadOnly]   
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsAuthorOrReadOnlyVisit]   
 
 
 
