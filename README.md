@@ -8,7 +8,7 @@
 /events/<int:pk>/ - перегляд окремого JSON-івента через GET. Для автора - оновлення через PUT і видалення через DELETE  
 /users/ - список юзерів в JSON.  
 /users/<int:pk>/ - перегляд окремого юзера в JSON  
-users/<int:organizer>/events - 
+users/<int:organizer>/events  
 /visitors/ - перегляд всіх "відвідувань" в JSON, POST дозволяє юзеру додатись в потрібний івент  
 /visitors/<int:pk>/ - перегляд окремого "відвідування", можливість видалити його (для юзера, який відвідує)  
 /register/ - реєстрація в POST-запиті  
