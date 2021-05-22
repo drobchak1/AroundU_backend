@@ -36,11 +36,35 @@ class EventSerializer(serializers.ModelSerializer):
             ('full_size', 'url'),
             ('thumbnail', 'thumbnail__100x100'),
         ],
-        allow_null=True
+        allow_null=True,
+        required=False
     )
     class Meta:
         model = Event
-        fields = '__all__'
+        fields = [
+            "image",
+            "title",
+            "description",
+            "event_type",
+            "city",
+            "address",
+            "date_and_time_of_event",
+            # "max_number_of_people",
+            "price",
+            # "visitors_count": null,
+            # "organizer": null
+            "visitors",
+            "coorganizers",
+        ]
+        extra_kwargs = {
+            "image": {"required": False},
+            # "max_number_of_people": null,
+            "price": {"required": False},
+            # "visitors_count": null,
+            # "organizer": null
+            "visitors": {"required": False},
+            "coorganizers": {"required": False},
+        }
 
 class VisitorsSerializer(serializers.ModelSerializer):
     user = serializers.ReadOnlyField(source='user.username')

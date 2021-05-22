@@ -12,11 +12,35 @@ class UserSerializer(serializers.ModelSerializer):
         sizes=[
             ('full_size', 'url'),
             ('thumbnail', 'thumbnail__100x100'),
-        ]
+        ],
+        allow_null=True,
+        required=False
     )
     class Meta:
         model = User
-        fields = '__all__'
+        fields = [
+            "username",
+            "password",
+            "email",
+            "first_name",
+            "last_name",
+            "image",
+            "bio",
+            "city",
+            "phone",
+            "events",
+            "visitors",
+        ]
+        extra_kwargs = {
+            "first_name": {"required": False},
+            "last_name": {"required": False},
+            "image": {"required": False},
+            "bio": {"required": False},
+            "city": {"required": False},
+            "phone": {"required": False},
+            "events": {"required": False},
+            "visitors": {"required": False},
+        }
         
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
 
@@ -38,24 +62,31 @@ class RegisterSerializer(serializers.ModelSerializer):
             ('full_size', 'url'),
             ('thumbnail', 'thumbnail__100x100'),
         ],
-        allow_null=True
+        allow_null=True,
+        required= False
     )
 
     password = serializers.CharField(write_only=True, required=True, validators=[validate_password])
     password2 = serializers.CharField(write_only=True, required=True)
-    first_name = serializers.CharField(write_only=True, allow_null=True)
-    last_name = serializers.CharField(write_only=True, allow_null=True)
-    bio = serializers.CharField(write_only=True, allow_null=True)
-    city = serializers.CharField(write_only=True, allow_null=True)
-    phone = serializers.CharField(write_only=True, allow_null=True)
+    first_name = serializers.CharField(write_only=True, allow_null=True, allow_blank=True, required= False)
+    last_name = serializers.CharField(write_only=True, allow_null=True, allow_blank=True, required= False)
+    bio = serializers.CharField(write_only=True, allow_null=True, allow_blank=True, required= False)
+    city = serializers.CharField(write_only=True, allow_null=True, allow_blank=True, required= False)
+    phone = serializers.CharField(write_only=True, allow_null=True, allow_blank=True, required= False)
 
     class Meta:
         model = User
         fields = ('username', 'password', 'password2', 'email', 'first_name', 'last_name', 'image', 'bio', 'city', 'phone')
-        # extra_kwargs = {
-        #     'first_name': {'required': True},
-        #     'last_name': {'required': True}
-        # }
+        extra_kwargs = {
+            "first_name": {"required": False},
+            "last_name": {"required": False},
+            "image": {"required": False},
+            "bio": {"required": False},
+            "city": {"required": False},
+            "phone": {"required": False},
+            "events": {"required": False},
+            "visitors": {"required": False},
+        }
 
     def validate(self, attrs):
         if attrs['password'] != attrs['password2']:
@@ -67,12 +98,12 @@ class RegisterSerializer(serializers.ModelSerializer):
         user = User.objects.create(
             username=validated_data['username'],
             email=validated_data['email'],
-            first_name=validated_data['first_name'],
-            last_name=validated_data['last_name'],
-            image=validated_data['image'],
-            bio=validated_data['bio'],
-            city=validated_data['city'],
-            phone=validated_data['phone'],
+            first_name=validated_data.get('first_name', None),
+            last_name=validated_data.get('last_name', None),
+            image=validated_data.get('image', None),
+            bio=validated_data.get('bio', None),
+            city=validated_data.get('city', None),
+            phone=validated_data.get('phone', None),
         )
 
         

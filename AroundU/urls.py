@@ -23,6 +23,7 @@ from django.conf.urls import url, include
 from django.conf.urls.static import static
 from rest_framework.routers import DefaultRouter
 from rest_framework_simplejwt.views import TokenRefreshView
+from rest_framework.authtoken.views import obtain_auth_token
 
 # router = DefaultRouter()
 # router.register(r'image_of_event', ImageofEventViewSet, basename='ImageofEvent')
@@ -48,6 +49,7 @@ urlpatterns = [
     path('visitors/<int:pk>/', VisitDetail.as_view()),
     # Login and logout
     path('api-auth/', include('rest_framework.urls')),
+    path('api-token-auth/', obtain_auth_token, name='api_token_auth'),
     # url(r'^', include(router.urls)),
     ###################LOGIN NEEDS WORK
     path('login/', MyObtainTokenPairView.as_view(), name='token_obtain_pair'),
