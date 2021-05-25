@@ -11,6 +11,26 @@ from django.contrib.auth.decorators import login_required
 from .permissions import IsAuthorOrReadOnly, IsAuthorOrReadOnlyVisit
 from rest_flex_fields.views import FlexFieldsModelViewSet
 
+####################ДІЧ З СТАКОВЕРФЛОУ№№№№№№№№№№№№№№№№№№№№№№
+# import boto
+# from AroundU import settings
+# from boto.exception import S3CreateError
+# from boto.s3.connection import S3Connection
+
+# conn = S3Connection(settings.AWS_ACCESS_KEY_ID,
+#                     settings.AWS_SECRET_ACCESS_KEY,
+#                     is_secure=True)
+# try:
+#     bucket = conn.create_bucket(settings.AWS_STORAGE_BUCKET_NAME)
+# except S3CreateError as e:
+#     bucket = conn.get_bucket(settings.AWS_STORAGE_BUCKET_NAME)
+
+# k = boto.s3.key.Key(bucket)
+# k.key = filename
+# k.set_contents_from_filename(filepath)
+
+##########################КІНЕЦЬ ДІЧІ######################
+
 # class-based views
 
 class EventList(generics.ListCreateAPIView):

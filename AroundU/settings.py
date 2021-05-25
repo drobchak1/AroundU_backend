@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
+from dj_database_url import DEFAULT_ENV
 import django_heroku
 from pathlib import Path
 import os
@@ -43,6 +44,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'versatileimagefield',
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -141,6 +143,16 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+# AWS_ACCESS_KEY_ID = os.environ.get('Access_key_ID')
+# AWS_SECRET_ACCESS_KEY = os.environ.get('Secret_access_key')
+AWS_ACCESS_KEY_ID = 'AKIA5AKHHNW7A4U4MACQ'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = "aroundu"
+
+AWS_S3_FILE_OVERWRITE = False
+AWS_DEFAULT_ACL = None
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 
 # Static files (CSS, JavaScript, Images)
