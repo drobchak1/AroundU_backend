@@ -33,15 +33,11 @@ router.register(r'events', EventViewSet)
 urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'', include((router.urls, 'events'), namespace='api')),
-    # path('signup/', signup),
-    # # Combining the views with these URL patterns creates the get posts/, post posts/, get posts/<int:pk>/, put posts/<int:pk>/, and delete posts/<int:pk>/ endpoints
-    # path('events/', EventList.as_view()),
-    # path('events/<int:pk>/', EventDetail.as_view()),
-    path('users/', UserList.as_view()),
-    path('users/<int:organizer>/events/', OrganizerEventList.as_view()),
-    path('users/<int:pk>/', UserDetail.as_view()),
-    path('visitors/', VisitorsList.as_view()),
-    path('visitors/<int:pk>/', VisitDetail.as_view()),
+    path('users/', UserList.as_view(), name='users'),
+    path('users/<int:organizer>/events/', OrganizerEventList.as_view(), name='organizer_events'),
+    path('users/<int:pk>/', UserDetail.as_view(), name='user_detail'),
+    path('visitors/', VisitorsList.as_view(), name='visitors'),
+    path('visitors/<int:pk>/', VisitDetail.as_view(), name='1_visit'),
     # Login and logout
     path('api-auth/', include('rest_framework.urls')),
     path('api-token-auth/', obtain_auth_token, name='api_token_auth'),

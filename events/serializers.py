@@ -4,30 +4,6 @@ from .models import Event, Visitors
 from versatileimagefield.serializers import VersatileImageFieldSerializer 
 from events import services
 
-# class ImageofEventSerializer(serializers.ModelSerializer):
-#     image = VersatileImageFieldSerializer(
-#         sizes=[
-#             ('full_size', 'url'),
-#             ('thumbnail', 'thumbnail__100x100'),
-#         ]
-#     )
-
-#     class Meta:
-#         model = ImageofEvent
-#         fields = ['pk', 'image']
-
-# class ImageofUserSerializer(serializers.ModelSerializer):
-#     image = VersatileImageFieldSerializer(
-#         sizes=[
-#             ('full_size', 'url'),
-#             ('thumbnail', 'thumbnail__100x100'),
-#         ]
-#     )
-
-#     class Meta:
-#         model = ImageofUser
-#         fields = ['pk', 'image']
-
 class EventSerializer(serializers.ModelSerializer):
     # author = serializers.ReadOnlyField(source='author.username')
     visitors = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
