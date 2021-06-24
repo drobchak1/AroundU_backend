@@ -33,7 +33,6 @@ class Event(models.Model):
     date_of_creation = models.DateTimeField(auto_now_add=True)
     organizer = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='events', on_delete=models.CASCADE)
     image = VersatileImageField(
-        #'ImageofEvent',
         upload_to='images/',
         ppoi_field='image_ppoi', 
         blank=True,

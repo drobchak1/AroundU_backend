@@ -2,10 +2,12 @@
   
 Через браузер в Джанго є функція перегляду json-запитів через браузер. Запити можна додавати через HTML-form, або Raw data (JSON-файл)  
   
-**/admin/** - доступ до адміністрації django  
-**/events/** - GET - дозволяє отримати JSON-список івентів  
-**/events/** - POST - дозволяє створити новий івент  
+**/admin/** - django administration  
+**/events/** - events-list (GET) and event-creation(POST)  
 **/events/**<int:pk>/ - перегляд окремого JSON-івента через GET. Для автора - оновлення через PUT і видалення через DELETE  
+**/events/<int:pk>/visit/** - Visit event  
+**/events/<int:pk>/unvisit/** - Unvisit event  
+**/events/<int:pk>/fans/** - List of users who visit event  
 **/users/** - список юзерів в JSON.  
 **/users/<int:pk>/** - перегляд окремого юзера в JSON  
 **/users/<int:organizer>/events** - всі івенти створені одним організатором  
@@ -16,10 +18,6 @@
 **/change_password/<int:pk>/** - зміна пароля для юзера з відповідним id (POST)  
 **/update_profile/<int:pk>/** - оновлення профіля для юзера з відповідним id (POST)  
   
-## Важливо  
-На heroku не працюють, на жаль, зображення. Щоб вони працювали - потрібно інтегрувати Amazon.  
-Додавати зображення в юзерів та івенти НЕ МОЖНА, це зіпсує роботу сторінок /events/, /users/.  
-В офлайн же версії (при скачуванні і запуску локально) зображення працюють.  
   
 ## Дані адміна та юзерів  
   
@@ -42,14 +40,11 @@ EVENT_TYPE = (
 event_type = models.CharField(max_length=3,choices=EVENT_TYPE)  
 city = models.CharField(max_length=50)  
 address = models.CharField(max_length=100)  
-# image = models.ImageField(upload_to=get_image_path, blank=True, null=True)  
 date_and_time_of_event = models.DateTimeField()  
 max_number_of_people = models.IntegerField(null=True,blank=True)  
 price = models.IntegerField(null=True,blank=True)  
 date_of_creation = models.DateTimeField(auto_now_add=True)  
-visitors_count = models.IntegerField(default=0)  
 organizer = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='events', on_delete=models.CASCADE)  
-# image = models.ForeignKey('ImageofEvent', related_name='events', blank=True,null=True, on_delete=models.CASCADE)  
 image = VersatileImageField(
     #'ImageofEvent',
     upload_to='images/',
@@ -58,13 +53,8 @@ image = VersatileImageField(
     null=True,
 )  
 image_ppoi = PPOIField()  
-```
-## Модель відвідування    
-  
-```
-class Visitors(models.Model):  
-    user=models.ForeignKey('auth.User', related_name='visitors', on_delete=models.CASCADE)  
-    event=models.ForeignKey('Event', related_name='visitors',on_delete=models.CASCADE)  
+visitors = GenericRelation(Visitors)
+date_of_creation = models.DateTimeField(auto_now_add=True)
 ```
   
 ## Модель юзера    
