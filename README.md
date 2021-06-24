@@ -7,7 +7,7 @@
 **/events/**<int:pk>/ - перегляд окремого JSON-івента через GET. Для автора - оновлення через PUT і видалення через DELETE  
 **/events/<int:pk>/visit/** - Visit event  
 **/events/<int:pk>/unvisit/** - Unvisit event  
-**/events/<int:pk>/fans/** - List of users who visit event  
+**/events/<int:pk>/visitors/** - List of users who visit event  
 **/users/** - список юзерів в JSON.  
 **/users/<int:pk>/** - перегляд окремого юзера в JSON  
 **/users/<int:organizer>/events** - всі івенти створені одним організатором  
@@ -17,6 +17,8 @@
 **/api-token-auth/** - авторизація через токен  
 **/change_password/<int:pk>/** - зміна пароля для юзера з відповідним id (POST)  
 **/update_profile/<int:pk>/** - оновлення профіля для юзера з відповідним id (POST)  
+**/token/** - JWT token acquiring  
+**/token/refresh/** - JWT token refresh  
   
   
 ## Дані адміна та юзерів  
