@@ -1,6 +1,7 @@
 from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APITestCase, APIClient
+
 from .models import User
 
 class UsersTests(APITestCase):
@@ -11,6 +12,7 @@ class UsersTests(APITestCase):
         url = reverse('users')
         response = self.client.get(url, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
+
 
     def test_api_jwt(self):
         """
@@ -58,6 +60,7 @@ class UsersTests(APITestCase):
             "date_and_time_of_event": "2021-07-30T15:09:00Z"
         })
         self.assertEqual(resp.status_code, status.HTTP_201_CREATED)
+
 
     def test_register(self):
         """

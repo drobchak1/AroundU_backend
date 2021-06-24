@@ -1,17 +1,17 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Event, Visitors
-from users.models import User #, ImageofUser
-from .forms import EventForm
-from .serializers import EventSerializer, VisitorsSerializer     #, ImageofEventSerializer, ImageofUserSerializer
-from users.serializers import UserSerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status, generics,permissions
 from django.contrib.auth.decorators import login_required
+from rest_framework import viewsets
+
+from events.mixins import VisitMixin
+from .serializers import EventSerializer, VisitorsSerializer
+from users.serializers import UserSerializer
+from .models import Event, Visitors
+from users.models import User 
 from .permissions import IsAuthorOrReadOnly, IsAuthorOrReadOnlyVisit
 
-from rest_framework import viewsets
-from events.mixins import VisitMixin
 
 class EventViewSet(VisitMixin, viewsets.ModelViewSet):
     """CRUD operations on events and visits
@@ -33,6 +33,7 @@ class EventViewSet(VisitMixin, viewsets.ModelViewSet):
 #     def perform_create(self, serializer):
 #         serializer.save(organizer=self.request.user)
 
+
 class OrganizerEventList(generics.ListCreateAPIView):
     # queryset = Event.objects.all()
     serializer_class = EventSerializer
@@ -48,6 +49,7 @@ class OrganizerEventList(generics.ListCreateAPIView):
 #     serializer_class = EventSerializer
 #     permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsAuthorOrReadOnly]
 
+
 class VisitorsList(generics.ListCreateAPIView):
     queryset = Visitors.objects.all()
     serializer_class = VisitorsSerializer
@@ -55,6 +57,7 @@ class VisitorsList(generics.ListCreateAPIView):
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
+
 
 class VisitDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Visitors.objects.all()

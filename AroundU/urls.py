@@ -15,9 +15,6 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from events.views import VisitorsList, VisitDetail, OrganizerEventList, EventViewSet 
-from users.views import signup, RegisterView, ChangePasswordView, UpdateProfileView, UserList, UserDetail
-# Images
 from django.conf import settings
 from django.conf.urls import include, url
 from django.conf.urls.static import static
@@ -25,6 +22,9 @@ from rest_framework.routers import DefaultRouter
 from rest_framework_simplejwt.views import TokenRefreshView
 from rest_framework.authtoken.views import obtain_auth_token
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+
+from events.views import VisitorsList, VisitDetail, OrganizerEventList, EventViewSet 
+from users.views import RegisterView, ChangePasswordView, UpdateProfileView, UserList, UserDetail
 
 
 router = DefaultRouter()

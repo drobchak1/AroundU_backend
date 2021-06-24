@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from versatileimagefield.fields import VersatileImageField, PPOIField
+
+
 from AroundU import settings
 
 class User(AbstractUser):

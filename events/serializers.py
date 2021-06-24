@@ -1,8 +1,8 @@
 from rest_framework import serializers
-from .models import Event, Visitors
-# from users.models import User   #, ImageofUser
 from versatileimagefield.serializers import VersatileImageFieldSerializer 
+
 from events import services
+from .models import Event, Visitors
 
 class EventSerializer(serializers.ModelSerializer):
     # author = serializers.ReadOnlyField(source='author.username')

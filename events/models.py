@@ -1,10 +1,10 @@
 from django.db import models
-from users.models import User 
-from AroundU import settings
 from versatileimagefield.fields import VersatileImageField, PPOIField
 from django.contrib.contenttypes.fields import GenericRelation, GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
-# from django.contrib.auth.models import User
+
+from AroundU import settings
+
 
 class Visitors(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
