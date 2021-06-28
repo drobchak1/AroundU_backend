@@ -87,6 +87,8 @@ class UsersTests(APITestCase):
             "last_name": "",
             "bio": ""
         })
+        self.assertEqual(resp.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(User.objects.count(), 1)
         url_auth = reverse('token_obtain_pair')
         resp = self.client.post(url_auth, {'username':'user', 'password':'lol1lol1'}, format='json')
         self.assertEqual(resp.status_code, status.HTTP_200_OK)
