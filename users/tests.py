@@ -3,6 +3,7 @@ from rest_framework import status
 from rest_framework.test import APITestCase, APIClient
 
 from .models import User
+from events.models import Event
 
 class UsersTests(APITestCase):
     def test_get_users_list(self):
@@ -16,20 +17,28 @@ class UsersTests(APITestCase):
 
     def test_api_jwt(self):
         """
-        Ensure we can create user and create event using JWT-token.
+        Ensure we can register user and create event using JWT-token.
         """
         url = reverse('token_obtain_pair')
-        u = User.objects.create_user(username='user', email='user@foo.com', password='pass')
-        u.is_active = False
-        u.save()
+        url_register = reverse('auth_register')
+        resp = self.client.post(url_register,     {
+            "username": "user",
+            "password": "lol1lol1",
+            "password2": "lol1lol1",
+            "email": "lol@gmail.com",
+            "first_name": "",
+            "last_name": "",
+            "bio": ""
+        })
+        self.assertEqual(resp.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(User.objects.count(), 1)
+        self.assertEqual(User.objects.get().username, 'user')
 
-        resp = self.client.post(url, {'email':'user@foo.com', 'password':'pass'}, format='json')
+        resp = self.client.post(url, {'email':'lol@gmail.com', 'password':'lol1lol1'}, format='json')
         self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
 
-        u.is_active = True
-        u.save()
 
-        resp = self.client.post(url, {'username':'user', 'password':'pass'}, format='json')
+        resp = self.client.post(url, {'username':'user', 'password':'lol1lol1'}, format='json')
         self.assertEqual(resp.status_code, status.HTTP_200_OK)
         print(resp.data)
         self.assertTrue('access' in resp.data)
@@ -60,15 +69,17 @@ class UsersTests(APITestCase):
             "date_and_time_of_event": "2021-07-30T15:09:00Z"
         })
         self.assertEqual(resp.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(Event.objects.count(), 1)
+        self.assertEqual(Event.objects.get().title, 'event24')
 
 
-    def test_register(self):
+    def test_update(self):
         """
-        Ensure we can register user
+        Ensure we can update user
         """
-        url = reverse('auth_register')
-        resp = self.client.post(url,     {
-            "username": "user3",
+        url_register = reverse('auth_register')
+        resp = self.client.post(url_register,     {
+            "username": "user",
             "password": "lol1lol1",
             "password2": "lol1lol1",
             "email": "lol@gmail.com",
@@ -76,4 +87,25 @@ class UsersTests(APITestCase):
             "last_name": "",
             "bio": ""
         })
-        self.assertEqual(resp.status_code, status.HTTP_201_CREATED)
+        url_auth = reverse('token_obtain_pair')
+        resp = self.client.post(url_auth, {'username':'user', 'password':'lol1lol1'}, format='json')
+        self.assertEqual(resp.status_code, status.HTTP_200_OK)
+        token = resp.data['access']
+
+        url_upd = reverse('auth_update_profile', kwargs={'pk': 1})
+        print(url_upd)
+
+        client = APIClient()
+        client.credentials(HTTP_AUTHORIZATION='Bearer ' + token)
+        resp = client.patch(url_upd,     {
+            "username": "user3",
+            "email": "lol@gmail.com",
+            "first_name": "",
+            "last_name": "",
+            "image": "",
+            "bio": "",
+            "city": "",
+            "phone": ""
+        })
+        self.assertEqual(resp.status_code, status.HTTP_200_OK)
+        self.assertEqual(User.objects.get().username, 'user3')
