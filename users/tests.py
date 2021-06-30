@@ -87,6 +87,7 @@ class UsersTests(APITestCase):
             "last_name": "",
             "bio": ""
         })
+        print(resp.headers["Location"])
         self.assertEqual(resp.status_code, status.HTTP_201_CREATED)
         self.assertEqual(User.objects.count(), 1)
         url_auth = reverse('token_obtain_pair')
@@ -94,8 +95,7 @@ class UsersTests(APITestCase):
         self.assertEqual(resp.status_code, status.HTTP_200_OK)
         token = resp.data['access']
 
-        url_upd = reverse('auth_update_profile', kwargs={'pk': 1})
-        print(url_upd)
+        url_upd = reverse('auth_update_profile', kwargs={'pk': 2})
 
         client = APIClient()
         client.credentials(HTTP_AUTHORIZATION='Bearer ' + token)
